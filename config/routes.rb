@@ -5,14 +5,14 @@ Rails.application.routes.draw do
       resources :users, only: [:create] do
         resources :bids
       end
-      resources :businesses, only: [:show, :create] do
+      resources :businesses, only: [:create] do
         resources :bid_responses
       end
+      get '/users/profile', to: 'users#profile'
+      get '/businesses/profile', to: 'businesses#profile'
+      post '/users/login', to: 'auth#create_user'
+      post '/businesses/login', to: 'auth#create_business'
     end
   end
 
-  get '/users/profile', to: 'users#profile'
-  get '/businesses/profile', to: 'businesses#profile'
-  post '/login', to: 'auth#create'
-  
 end

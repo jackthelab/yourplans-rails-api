@@ -35,8 +35,15 @@ class ApplicationController < ActionController::API
         end
     end
 
+    def current_business
+        if decoded_token
+            business_id = decoded_token['business_id']
+            @business = Business.find_by(id: business_id)
+        end
+    end
+
     def logged_in?
-        !!current_user
+        !!current_user || !!current_business
     end
 
     def authorized
