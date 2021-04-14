@@ -2,11 +2,16 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :show, :create, :destroy]
-      resources :businesses, only: [:index, :show, :create, :update, :destroy]
+      resources :users, only: [:create] do
+        resources :bids
+      end
+      resources :businesses, only: [:show, :create] do
+        resources :bid_responses
+      end
     end
   end
 
-  # get '/profile', to: 'users#profile'
-  # post '/login', to: 'auth#create'
+  get '/profile', to: 'users#profile'
+  post '/login', to: 'auth#create'
+  
 end
