@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/profile', to: 'users#profile'
+  get '/users/profile', to: 'users#profile'
+  get '/businesses/profile', to: 'businesses#profile'
   post '/login', to: 'auth#create'
   
 end
