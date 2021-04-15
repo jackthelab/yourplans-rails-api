@@ -2,7 +2,7 @@ class Api::V1::BusinessesController < ApplicationController
     skip_before_action :authorized, only: [:create]
 
     def profile
-        render json: @business, except: [:password, :created_at, :updated_at], status: :accepted
+        render json: @business, except: [:password_digest, :created_at, :updated_at], status: :accepted
     end
 
     def create
@@ -10,7 +10,7 @@ class Api::V1::BusinessesController < ApplicationController
 
         if @business.valid?
             @token = encode_token(business_id: @business.id)
-            render json: { business: @business.to_json(except: [:password, :created_at, :updated_at]), jwt: @token }, status: :created
+            render json: { business: @business.to_json(except: [:password_digest, :created_at, :updated_at]), jwt: @token }, status: :created
         else
             render json: { error: 'failed to create business' }, status: :not_acceptable
         end
