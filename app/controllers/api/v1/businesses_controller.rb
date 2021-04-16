@@ -2,7 +2,11 @@ class Api::V1::BusinessesController < ApplicationController
     skip_before_action :authorized, only: [:create]
 
     def profile
-        render json: @business, except: [:password_digest, :created_at, :updated_at], status: :accepted
+        # render json: @business, except: [:password_digest, :created_at, :updated_at], status: :accepted
+        render json: @business.to_json(:include => {
+            :bid_responses => {except: [:business_id, :created_at, :updated_at] },
+            :experiences => {except: [:bid_response_id, :created_at, :updated_at] }
+        }, except: [:password_digest, :created_at, :updated_at])
     end
 
     def create
