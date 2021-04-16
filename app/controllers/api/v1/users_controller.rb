@@ -4,7 +4,11 @@ class Api::V1::UsersController < ApplicationController
     def profile
         # render json: @user, except: [:email, :password_digest, :created_at, :updated_at], status: :accepted
         render json: @user.to_json(:include => {
-            :bids => {except: [:user_id, :created_at, :updated_at] }
+            :bids => {except: [:user_id, :created_at, :updated_at] },
+            :experiences => {:includes => {
+                :bid => {except: [:id, :created_at, :updated_at] },
+                :bid_response => {except: [:id, :created_at, :updated_at] }
+            }, except: [:bid_id, :created_at, :updated_at] }
         }, except: [:email, :password_digest, :created_at, :updated_at])
     end
 
