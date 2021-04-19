@@ -8,4 +8,18 @@ class Business < ApplicationRecord
     has_many :bid_responses
     has_many :experiences, through: :bid_responses
     has_many :reviews, through: :experiences
+
+    def state_bids
+        state = self.state
+
+        Bid.all.select { |bid| bid.state == state }
+    end
+
+    def city_bids
+        city = self.city
+        state = self.state
+
+        Bid.all.select { |bid| bid.state === state && bid.city = city }
+    end
+
 end
