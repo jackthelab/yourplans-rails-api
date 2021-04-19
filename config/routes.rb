@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
       get '/users/profile', to: 'users#profile'
       get '/businesses/profile', to: 'businesses#profile'
+      get '/businesses/open_bids', to: 'businesses#available_bids'
       post '/users/login', to: 'auth#create_user'
       post '/businesses/login', to: 'auth#create_business'
     end
