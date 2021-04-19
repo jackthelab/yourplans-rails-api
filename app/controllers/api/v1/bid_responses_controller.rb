@@ -1,20 +1,20 @@
 class Api::V1::BidResponsesController < ApplicationController
 
-    # def create
-    #     bid = Bid.create!(bid_params)
+    def create
+        bid_response = BidResponse.create!(bid_response_params)
 
-    #     if bid.valid?
-    #         render json: bid, except: [:created_at, :updated_at]
-    #     else
-    #         render json: { error: "This bid couldn't be created."}
-    #     end
+        if bid_response.valid?
+            render json: bid_response, except: [:created_at, :updated_at]
+        else
+            render json: { error: "This bid response couldn't be created."}
+        end
 
-    # end
+    end
 
-    # private
+    private
 
-    # def bid_params
-    #     params.require(:bid).permit(:user_id, :name, :city, :state, :budget, :num_in_party, :notes, :open_status, :date)
-    # end
+    def bid_response_params
+        params.require(:bid_response).permit(:business_id, :bid_id, :price, :category, :details)
+    end
 
 end
