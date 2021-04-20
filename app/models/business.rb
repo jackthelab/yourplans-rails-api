@@ -12,14 +12,14 @@ class Business < ApplicationRecord
     def state_bids
         state = self.state
 
-        Bid.all.select { |bid| bid.state == state }
+        Bid.all.select { |bid| bid.state == state && bid.open_status == true }
     end
 
     def city_bids
         city = self.city
         state = self.state
 
-        Bid.all.select { |bid| bid.state === state && bid.city = city }
+        Bid.all.select { |bid| bid.state === state && bid.city = city && bid.open_status == true }
     end
 
 end

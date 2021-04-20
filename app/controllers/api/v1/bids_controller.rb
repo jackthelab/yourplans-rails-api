@@ -1,4 +1,4 @@
-class Api::V1::BidsController < ApplicationController
+class Api::V1::BidsController < ApplicationControllerB
 
     def create
         bid = Bid.create!(bid_params)
