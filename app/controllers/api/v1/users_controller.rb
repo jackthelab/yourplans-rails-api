@@ -14,18 +14,6 @@ class Api::V1::UsersController < ApplicationController
                 :bid_response => {except: [:id, :created_at, :updated_at] }
             }, except: [:bid_id, :created_at, :updated_at] }
         }, except: [:email, :password_digest, :created_at, :updated_at])
-        # render json: {
-        #     profile: @user.to_json(except: [:email, :password_digest, :created_at, :updated_at]),
-        #     bids: @user.bids.to_json(:include => {
-        #         :bid_responses => {:include => {
-        #             :business => { except: [:password_digest, :created_at, :updated_at] }
-        #         }, except: [:business_id, :created_at, :updated_at]}
-        #     }, except: [:user_id, :created_at, :updated_at]),
-        #     experiences: @user.experiences.to_json(:include => {
-        #         :bid => {only: [:id]},
-        #         :bid_response => {only: [:id, :business_id]}
-        #     }, only: [:id])
-        # }
     end
 
     def create
