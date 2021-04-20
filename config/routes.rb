@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       resources :bids do
         resources :bid_responses
       end
+      resources :experiences, only: [:create] do
+        resources :reviews
+      end
       get '/users/profile', to: 'users#profile'
       get '/businesses/profile', to: 'businesses#profile'
       get '/businesses/open_bids', to: 'businesses#available_bids'

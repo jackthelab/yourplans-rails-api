@@ -1,4 +1,4 @@
-class Api::V1::BidsController < ApplicationControllerB
+class Api::V1::BidsController < ApplicationController
 
     def create
         bid = Bid.create!(bid_params)
@@ -9,6 +9,20 @@ class Api::V1::BidsController < ApplicationControllerB
             render json: { error: "This bid couldn't be created."}
         end
 
+    end
+
+    def update
+        bid = Bid.find(params[:id])
+        if bid.update(bid_params)
+            render json: bid, except: [:created_at]
+        else
+            render json: { message: "Couldn't update this bid" }
+        end
+    end
+
+    def delete
+        bid = Bid.find(params[:id])
+        bid.destroy
     end
 
     private
