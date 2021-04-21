@@ -2,7 +2,6 @@ class Api::V1::UsersController < ApplicationController
     skip_before_action :authorized, only: [:create]
 
     def profile
-        # render json: @user, except: [:email, :password_digest, :created_at, :updated_at], status: :accepted
         render json: @user.to_json(:include => {
             :bids => {:include => {
                 :bid_responses => {:include => {
