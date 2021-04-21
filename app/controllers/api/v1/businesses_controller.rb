@@ -3,8 +3,13 @@ class Api::V1::BusinessesController < ApplicationController
 
     def profile
         render json: @business.to_json(:include => {
-            :bid_responses => {except: [:business_id, :created_at, :updated_at] },
-            :experiences => {except: [:bid_response_id, :created_at, :updated_at] }
+            :bid_responses => {:include => {
+                :bid => {only: [:id, :open_status]}
+            }, except: [:business_id, :created_at, :updated_at] },
+            :experiences => {:include => {
+                :bid => {except: [:created_at, :updated_at]},
+                :bid_response => {except: [:created_at, :updated_at]}
+            }, except: [:bid_response_id, :created_at, :updated_at] }
         }, except: [:password_digest, :created_at, :updated_at])
     end
 
