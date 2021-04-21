@@ -10,7 +10,9 @@ class Api::V1::UsersController < ApplicationController
             }, except: [:user_id, :created_at, :updated_at]},
             :experiences => {:include => {
                 :bid => {except: [:id, :created_at, :updated_at] },
-                :bid_response => {except: [:id, :created_at, :updated_at] }
+                :bid_response => {:include => {
+                    :business => {only: [:name, :street_address, :city, :state, :website]}
+                }, except: [:id, :created_at, :updated_at] }
             }, except: [:bid_id, :created_at, :updated_at] }
         }, except: [:email, :password_digest, :created_at, :updated_at])
     end
