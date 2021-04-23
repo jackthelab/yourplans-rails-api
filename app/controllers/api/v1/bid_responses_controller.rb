@@ -19,7 +19,9 @@ class Api::V1::BidResponsesController < ApplicationController
         bid_response = BidResponse.create!(bid_response_params)
 
         if bid_response.valid?
-            render json: bid_response, except: [:created_at, :updated_at]
+            render json: bid_response.to_json(:include => {
+                :bid => {only: [:id, :name, :open_status]}
+            }, except: [:business_id, :created_at, :updated_at])
         else
             render json: { error: "This bid response couldn't be created."}
         end
